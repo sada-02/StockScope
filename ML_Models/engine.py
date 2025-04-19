@@ -78,16 +78,63 @@ def predict_price(startdate, enddate, batch_size, prediction_days, company):
     return predictions, dates
 
 
+def predict_sentiment():
+    tokenizer = AutoTokenizer.from_pretrained('nlptown/bert-base-multilingual-uncased-sentiment')
+    model = AutoModelForSequenceClassification.from_pretrained('nlptown/bert-base-multilingual-uncased-sentiment')
+    tokens = tokenizer.encode('Tesla is changing CEO, but', return_tensors='pt')
+    result = model(tokens)
+    predicted_sentiment = (torch.argmax(result.logits)+1).item()
+    return predicted_sentiment
+
+
+def technical_analysis(startdate, enddate, company):
+    
+    start = dt.datetime.strptime(startdate, "%Y-%m-%d")
+    end = dt.datetime.strptime(enddate, "%Y-%m-%d")
+    stock_list = [company]
+    df = yf.download(stock_list, period='1d', start=start, end=end)
+    vol = df['Volume']
+
+    vol = np.array(vol[-31:])
+    prev_vol = vol[:30]
+    curr_vol = vol[-1:]
+    mean_vol = prev_vol.mean()
+    ema_9 = df['Close'].ewm(span=9, adjust=False).mean()
+    ema_12 = df['Close'].ewm(span=12, adjust=False).mean()
+    ema_26 = df['Close'].ewm(span=26, adjust=False).mean()
+    macd_line = ema_12 - ema_26
+    signal_line = macd_line.ewm(span=20, adjust=False).mean()
+    curr_macd = macd_line[-1:].item()
+    curr_signal = signal_line[-1:].item()
+
+    if(curr_vol >= 1.1*mean_vol and curr_macd>0 and curr_macd > curr_signal):
+        tech_ans = "Buy"
+    elif(curr_vol >= 1.1*mean_vol and curr_macd<0 and curr_macd < curr_signal):
+        tech_ans = "Short"
+    elif(curr_vol < mean_vol or curr_macd<0 or curr_macd < curr_signal):
+        tech_ans = "Sell"
+    elif(curr_vol < mean_vol or curr_macd>0 or curr_macd > curr_signal):
+        tech_ans = "Cut Shorts"
+    else:
+        tech_ans = "Indecisive"
+
+    return tech_ans;
+
+
 def main(startdate, enddate, batch_size, prediction_days, company):
 
     predicted_prices, dates = predict_price(startdate, enddate, batch_size, prediction_days,company)
+    predicted_sentiment = predict_sentiment()
+    advice = technical_analysis(startdate, enddate, company)
     predicted_prices_list=predicted_prices.tolist()
     dates_list=dates.tolist()
     stock_variable_obj=stockdata.stock_variables(company)
 
     return_obj = {
             "predicted_prices": predicted_prices_list,
-            "dates":dates_list,
+            "dates":dates_list, 
+            "predicted_sentiment": predicted_sentiment, 
+            "advice": advice,
             "stock":stock_variable_obj
         }
     
