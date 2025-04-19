@@ -17,8 +17,8 @@ Our Company Stockscope comprises of five talented and motivated individuals, eac
 - Yarn (https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable)
 
 # Steps for Installation: 
-1. Clone the repository in your local directory using the command `git clone https://github.com/Demigod345/SkyView_Capital`
-2. Change directory to cloned Repository `cd SkyView_Capital`
+1. Clone the repository in your local directory using the command `git clone https://github.com/tanaykapadia/StockScope.git`
+2. Change directory to cloned Repository `cd StockScope`
 3. Install Client-Side dependencies `cd Client && npm start`
 4. Install Express-Server-Side dependencies `cd Backend && yarn install`
 5. Now we will be Installing Flask-Server-Side dependencies `cd ML_Model`
