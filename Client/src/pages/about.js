@@ -162,7 +162,7 @@ function About() {
                 </p>
                 <p>kartik_s@cs.iitr.ac.in</p>
                 <a
-                  href="https://www.linkedin.com/in/kartik-sarda"
+                  href="https://www.linkedin.com/in/kartik-sarda-6606362a5/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
