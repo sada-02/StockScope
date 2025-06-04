@@ -134,7 +134,7 @@ function About() {
                   Tanay Kapadia, or 'Front End Expert,' adds a touch of creativity
                   and out-of-the-box thinking.<br></br>
                 </p>
-                <p>kartik_s@cs.iitr.ac.in</p>
+                <p>tanay_k@cs.iitr.ac.in</p>
                 <a
                   href="https://www.linkedin.com/in/tanay-kapadia"
                   target="_blank"

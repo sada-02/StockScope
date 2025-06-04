@@ -1,3 +1,31 @@
-<svg width="133" height="158" viewBox="0 0 133 158" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M132.544 71.2339V47.2795C132.544 21.1676 110.136 0 82.494 0H50.05C22.408 0 0 21.1676 0 47.2795V110.062C0 136.174 22.408 157.341 50.05 157.341H82.494C110.136 157.341 132.544 136.174 132.544 110.062V86.1063C124.306 86.1063 117.628 92.4147 117.628 100.197V110.062C117.628 128.392 101.898 143.251 82.494 143.251H50.05C30.646 143.251 14.916 128.392 14.916 110.062V47.2795C14.916 28.9496 30.646 14.0903 50.05 14.0903H82.494C101.898 14.0903 117.628 28.9496 117.628 47.2795V57.1445H105.198V47.2795C105.198 35.4346 95.033 25.8323 82.494 25.8323H50.05C37.511 25.8323 27.346 35.4346 27.346 47.2795V50.753C27.346 61.6674 33.937 71.6268 44.324 76.4067L78.381 92.0803C85.662 95.431 90.282 102.411 90.282 110.062V110.066C90.282 114.125 86.805 117.414 82.509 117.416C73.57 117.419 58.982 117.419 50.041 117.419C45.742 117.419 42.262 114.127 42.262 110.067V100.199C42.262 92.4166 35.584 86.1083 27.346 86.1083V110.064C27.346 121.908 37.511 131.511 50.05 131.511H82.494C95.033 131.511 105.198 121.908 105.198 110.064V106.589C105.198 95.6747 98.607 85.7153 88.22 80.9354L54.163 65.2628C46.867 61.9055 42.243 54.9028 42.263 47.2342C42.273 43.1902 45.77 39.9245 50.051 39.9245H82.495C86.796 39.9245 90.283 43.2185 90.283 47.2814V71.2357H132.544V71.2339Z" fill="#3AAF9F"/>
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Scope/Target Circles -->
+  <circle cx="30" cy="30" r="28" stroke="url(#gradient1)" stroke-width="2" fill="none"/>
+  <circle cx="30" cy="30" r="20" stroke="url(#gradient1)" stroke-width="1.5" fill="none" opacity="0.7"/>
+  <circle cx="30" cy="30" r="12" stroke="url(#gradient1)" stroke-width="1" fill="none" opacity="0.5"/>
+  
+  <!-- AI Neural Network Pattern -->
+  <g opacity="0.8">
+    <circle cx="20" cy="20" r="2" fill="#3b82f6"/>
+    <circle cx="40" cy="20" r="2" fill="#3b82f6"/>
+    <circle cx="30" cy="35" r="2" fill="#06b6d4"/>
+    <circle cx="15" cy="40" r="2" fill="#06b6d4"/>
+    <circle cx="45" cy="40" r="2" fill="#06b6d4"/>
+    
+    <line x1="20" y1="20" x2="30" y2="35" stroke="url(#gradient1)" stroke-width="1" opacity="0.6"/>
+    <line x1="40" y1="20" x2="30" y2="35" stroke="url(#gradient1)" stroke-width="1" opacity="0.6"/>
+    <line x1="30" y1="35" x2="15" y2="40" stroke="url(#gradient1)" stroke-width="1" opacity="0.6"/>
+    <line x1="30" y1="35" x2="45" y2="40" stroke="url(#gradient1)" stroke-width="1" opacity="0.6"/>
+  </g>
+  
+  <!-- Stock Chart Arrow -->
+  <path d="M15 45 L25 35 L35 40 L45 25" stroke="#10b981" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <polygon points="43,23 47,25 43,27" fill="#10b981"/>
+  
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+  </defs>
 </svg>
