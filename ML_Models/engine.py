@@ -1,15 +1,12 @@
-import yfinance as yf
 import numpy as np
 import pandas as pd
 import datetime as dt
-from pandas_datareader import data as pdr
 from keras.models import Sequential
 from keras.layers import LSTM
 from keras.layers import Dense
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import stockdata
-
 
 class predictions:
     def __init__(self, predicted_prices, dates, predicted_sentiment, advise):
@@ -19,24 +16,26 @@ class predictions:
         self.advise = advise
 
 def build_dataset(sequence, n_steps):
-  X, y = list(), list()
-  for i in range(len(sequence)):
-    end_ix = i + n_steps
-    if end_ix > len(sequence) - 1:
-      break
-    seq_x = sequence[i:end_ix]
-    seq_y = sequence[end_ix]
-    X.append(seq_x)
-    y.append(seq_y)
-  return np.array(X, dtype=float), np.array(y, dtype=float)
-
+    X, y = list(), list()
+    for i in range(len(sequence)):
+        end_ix = i + n_steps
+        if end_ix > len(sequence) - 1:
+            break
+        seq_x = sequence[i:end_ix]
+        seq_y = sequence[end_ix]
+        X.append(seq_x)
+        y.append(seq_y)
+    return np.array(X, dtype=float), np.array(y, dtype=float)
 
 def predict_price(startdate, enddate, batch_size, prediction_days, company):
-    
     start = dt.datetime.strptime(startdate, "%Y-%m-%d")
     end = dt.datetime.strptime(enddate, "%Y-%m-%d")
-    stock_list = [company]
-    df = yf.download(stock_list, period='1d', start=start, end=end)
+    
+    # Get data from Alpha Vantage (use cached version)
+    df = stockdata.get_daily_data(company, use_cache=True)
+    
+    # Filter data based on date range
+    df = df[(df.index >= start) & (df.index <= end)]
 
     seq = df['Close']
     seq = np.array(seq, dtype=float)
@@ -77,7 +76,6 @@ def predict_price(startdate, enddate, batch_size, prediction_days, company):
 
     return predictions, dates
 
-
 def predict_sentiment():
     tokenizer = AutoTokenizer.from_pretrained('nlptown/bert-base-multilingual-uncased-sentiment')
     model = AutoModelForSequenceClassification.from_pretrained('nlptown/bert-base-multilingual-uncased-sentiment')
@@ -86,13 +84,16 @@ def predict_sentiment():
     predicted_sentiment = (torch.argmax(result.logits)+1).item()
     return predicted_sentiment
 
-
 def technical_analysis(startdate, enddate, company):
-    
     start = dt.datetime.strptime(startdate, "%Y-%m-%d")
     end = dt.datetime.strptime(enddate, "%Y-%m-%d")
-    stock_list = [company]
-    df = yf.download(stock_list, period='1d', start=start, end=end)
+    
+    # Get data from Alpha Vantage (use cached version)
+    df = stockdata.get_daily_data(company, use_cache=True)
+    
+    # Filter data based on date range
+    df = df[(df.index >= start) & (df.index <= end)]
+    
     vol = df['Volume']
 
     vol = np.array(vol[-31:])
@@ -118,24 +119,25 @@ def technical_analysis(startdate, enddate, company):
     else:
         tech_ans = "Indecisive"
 
-    return tech_ans;
-
+    return tech_ans
 
 def main(startdate, enddate, batch_size, prediction_days, company):
-
-    predicted_prices, dates = predict_price(startdate, enddate, batch_size, prediction_days,company)
+    # Clear cache before starting to ensure fresh data for this request
+    # stockdata.clear_cache()  # Uncomment if you want fresh data every time
+    
+    predicted_prices, dates = predict_price(startdate, enddate, batch_size, prediction_days, company)
     predicted_sentiment = predict_sentiment()
     advice = technical_analysis(startdate, enddate, company)
-    predicted_prices_list=predicted_prices.tolist()
-    dates_list=dates.tolist()
-    stock_variable_obj=stockdata.stock_variables(company)
+    predicted_prices_list = predicted_prices.tolist()
+    dates_list = dates.tolist()
+    stock_variable_obj = stockdata.stock_variables(company)
 
     return_obj = {
-            "predicted_prices": predicted_prices_list,
-            "dates":dates_list, 
-            "predicted_sentiment": predicted_sentiment, 
-            "advice": advice,
-            "stock":stock_variable_obj
-        }
+        "predicted_prices": predicted_prices_list,
+        "dates": dates_list, 
+        "predicted_sentiment": predicted_sentiment, 
+        "advice": advice,
+        "stock": stock_variable_obj
+    }
     
     return return_obj

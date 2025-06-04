@@ -1,9 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify 
 import os
 from dotenv import load_dotenv
 import time
 import engine
 import stockdata
+
 load_dotenv()
 
 app = Flask(__name__)             
@@ -18,22 +19,19 @@ def yo():
 
 @app.route("/model", methods=["POST"])
 def predict(): 
-    secretKey=request.headers.get('Token')
-    if(secretKey!=os.getenv('SERVER_SECRET')):
+    secretKey = request.headers.get('Token')
+    if(secretKey != os.getenv('SERVER_SECRET')):
         print("NOT VERIFIED")
         return "invalid request"
     else:
         print("VERIFIED")
         print(request.get_data())
-        # data=request.get_json()
-        company=request.get_json()['company']
-        startDate=request.get_json()['startDate']
-        endDate=request.get_json()['endDate']
-        days=request.get_json()['days']
-        # duration=request.get_json()['duration']
-        #Date- YYYY-MM-DD
-        #yaha par processing kar and data bhej
-        ticker=company.split('-')[0]
+        company = request.get_json()['company']
+        startDate = request.get_json()['startDate']
+        endDate = request.get_json()['endDate']
+        days = request.get_json()['days']
+        
+        ticker = company.split('-')[0]
         prediction_days = days
         batch_size = 7
         print("startDate", startDate)
@@ -48,4 +46,4 @@ def search():
     return jsonify(stockdata.stock_data(company))
 
 if __name__ == "__main__":        
-    app.run(debug=True, port=6969)                     
+    app.run(debug=True, port=6969)
