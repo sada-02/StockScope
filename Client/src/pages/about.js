@@ -54,9 +54,9 @@ function About() {
                   Vishesh Gupta is our go-to 'Problem Solver', known for his
                   witty humor and problem solving skills .<br></br>
                 </p>
-                <p>aaditya_a@cs.iitr.ac.in</p>
+                <p>vishesh_g@cs.iitr.ac.in</p>
                 <a
-                  href="https://www.linkedin.com/in/vishesh-gupta"
+                  href="https://www.linkedin.com/in/vishesh-gupta-77b0342b3/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
