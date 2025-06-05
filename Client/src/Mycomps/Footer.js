@@ -111,7 +111,7 @@ function Footer() {
             <div className="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
               <a>Connect</a>
               <a>&nbsp;&nbsp;&nbsp;</a>
-              <a href="https://twitter.com/OmAren05894987" role="button">
+              <a href="https://twitter.com/stock-scope" role="button">
                 <img
                   src="https://www.vectorlogo.zone/logos/twitter/twitter-tile.svg"
                   style={{ width: "10%", height: "10%" }}
@@ -129,7 +129,7 @@ function Footer() {
               </a>
               <a>&nbsp;&nbsp;&nbsp;</a>
               <a
-                href="https://www.linkedin.com/in/aaditya-aren-992221275/"
+                href="https://www.linkedin.com/in/rohan-gupta-68bba5283/"
                 role="button"
               >
                 <img
@@ -139,7 +139,7 @@ function Footer() {
               </a>
               <a>&nbsp;&nbsp;&nbsp;</a>
               <a
-                href="https://instagram.com/aaditya_aren.01?igshid=OGQ5ZDc2ODk2ZA=="
+                href="https://instagram.com/stock-scope"
                 role="button"
               >
                 <img

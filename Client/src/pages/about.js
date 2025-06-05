@@ -83,7 +83,7 @@ function About() {
                 </p>
                 <p>rohan_g@cs.iitr.ac.in</p>
                 <a
-                  href="https://www.linkedin.com/in/rohan-gupta"
+                  href="https://www.linkedin.com/in/rohan-gupta-68bba5283/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -109,7 +109,7 @@ function About() {
                 </p>
                 <p>shyam_da@cs.iitr.ac.in</p>
                 <a
-                  href="https://www.linkedin.com/in/shyam-agarwal"
+                  href="https://www.linkedin.com/in/shyam-agarwal-68542028a/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
