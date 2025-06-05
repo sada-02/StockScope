@@ -8,6 +8,12 @@ var CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
 export default function Graph(props) {
   const dataPoints = props.graphDataPoints;
   const stock = props.stockVariables;
+  
+  // Add loading check - don't render until we have stock data
+  if (!stock || !dataPoints) {
+    return <div>Loading...</div>;
+  }
+
   const options = {
     title: {
       text: `${props.stock} Stock Prices`,
@@ -31,7 +37,6 @@ export default function Graph(props) {
   };
 
   return (
-
     <div style={{ alignContent: "center" }}>
       <br></br>
       <br></br>
