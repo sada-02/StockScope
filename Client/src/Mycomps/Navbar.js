@@ -36,7 +36,7 @@ export default function Navbar() {
       <div className="navbarmain">
         <a href="/home" style={{ textDecoration: "none" }}>
           <h1 style={{ color: "" }} aaa>
-            SkyView Capital
+            StockScope
           </h1>
         </a>
       </div>
